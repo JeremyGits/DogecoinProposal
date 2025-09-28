@@ -4,7 +4,7 @@ libdir=@libdir@
 includedir=@includedir@
 
 Name: libunivalue
-Description: libunivalue, C++ universal value object and JSON library
-Version: @VERSION@
+Description: JSON library for C++ with SAX and DOM style APIs
+Version: @PACKAGE_VERSION@
 Libs: -L${libdir} -lunivalue
 Cflags: -I${includedir}

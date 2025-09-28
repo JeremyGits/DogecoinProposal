@@ -683,10 +683,10 @@ HARDENED_CXXFLAGS
 ERROR_CXXFLAGS
 COMPAT_LDFLAGS
 RELDFLAGS
-BITCOIN_TX_NAME
-BITCOIN_CLI_NAME
-BITCOIN_GUI_NAME
-BITCOIN_DAEMON_NAME
+DOGECOIN_TX_NAME
+DOGECOIN_CLI_NAME
+DOGECOIN_GUI_NAME
+DOGECOIN_DAEMON_NAME
 EXPECTED_DAYS_TO_NEXT_RELEASE
 CURRENT_RELEASE_DATE
 COPYRIGHT_HOLDERS_FINAL
@@ -728,12 +728,12 @@ TARGET_DARWIN_FALSE
 TARGET_DARWIN_TRUE
 ENABLE_ZMQ_FALSE
 ENABLE_ZMQ_TRUE
-BUILD_BITCOIN_LIBS_FALSE
-BUILD_BITCOIN_LIBS_TRUE
-BUILD_BITCOIN_UTILS_FALSE
-BUILD_BITCOIN_UTILS_TRUE
-BUILD_BITCOIND_FALSE
-BUILD_BITCOIND_TRUE
+BUILD_DOGECOIN_LIBS_FALSE
+BUILD_DOGECOIN_LIBS_TRUE
+BUILD_DOGECOIN_UTILS_FALSE
+BUILD_DOGECOIN_UTILS_TRUE
+BUILD_DOGECOIND_FALSE
+BUILD_DOGECOIND_TRUE
 EMBEDDED_UNIVALUE_FALSE
 EMBEDDED_UNIVALUE_TRUE
 UNIVALUE_LIBS
@@ -1785,8 +1785,8 @@ Optional Packages:
   --with-qtdbus           enable DBus support (default is yes if qt is enabled
                           and QtDBus is found)
   --with-boost[=ARG]      use Boost library from a standard location
-                          (ARG=yes), from the specified location (ARG=<path>),
-                          or disable it (ARG=no) [ARG=yes]
+                          (ARG=yes), from the specified location
+                          (ARG=<path>), or disable it (ARG=no) [ARG=yes]
   --with-boost-libdir=LIB_DIR
                           Force given directory for boost libraries. Note that
                           this will override library path detection, so use
@@ -1795,29 +1795,30 @@ Optional Packages:
                           libraries are located.
   --with-boost-system[=special-lib]
                           use the System library from boost - it is possible
-                          to specify a certain library for the linker e.g.
+                          to specify a certain library for the linker e.g.
                           --with-boost-system=boost_system-gcc-mt
   --with-boost-filesystem[=special-lib]
                           use the Filesystem library from boost - it is
-                          possible to specify a certain library for the linker
-                          e.g. --with-boost-filesystem=boost_filesystem-gcc-mt
+                          possible to specify a certain library for the
+                          linker e.g.
+                          --with-boost-filesystem=boost_filesystem-gcc-mt
   --with-boost-program-options[=special-lib]
                           use the program options library from boost - it is
-                          possible to specify a certain library for the linker
-                          e.g.
+                          possible to specify a certain library for the
+                          linker e.g.
                           --with-boost-program-options=boost_program_options-gcc-mt-1_33_1
   --with-boost-thread[=special-lib]
                           use the Thread library from boost - it is possible
-                          to specify a certain library for the linker e.g.
+                          to specify a certain library for the linker e.g.
                           --with-boost-thread=boost_thread-gcc-mt
   --with-boost-chrono[=special-lib]
                           use the Chrono library from boost - it is possible
-                          to specify a certain library for the linker e.g.
+                          to specify a certain library for the linker e.g.
                           --with-boost-chrono=boost_chrono-gcc-mt
   --with-boost-unit-test-framework[=special-lib]
                           use the Unit_Test_Framework library from boost - it
                           is possible to specify a certain library for the
-                          linker e.g.
+                          linker e.g.
                           --with-boost-unit-test-framework=boost_unit_test_framework-gcc
 
 Some influential environment variables:
@@ -3474,15 +3475,15 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-ac_config_headers="$ac_config_headers src/config/bitcoin-config.h"
+ac_config_headers="$ac_config_headers src/config/dogecoin-config.h"
 
 
+#AC_CONFIG_MACRO_DIR([build-aux/m4])
 
-
-BITCOIN_DAEMON_NAME=dogecoind
-BITCOIN_GUI_NAME=dogecoin-qt
-BITCOIN_CLI_NAME=dogecoin-cli
-BITCOIN_TX_NAME=dogecoin-tx
+DOGECOIN_DAEMON_NAME=dogecoind
+DOGECOIN_GUI_NAME=dogecoin-qt
+DOGECOIN_CLI_NAME=dogecoin-cli
+DOGECOIN_TX_NAME=dogecoin-tx
 
 
 
@@ -21332,9 +21333,9 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 # Check whether --with-utils was given.
 if test ${with_utils+y}
 then :
-  withval=$with_utils; build_bitcoin_utils=$withval
+  withval=$with_utils; build_dogecoin_utils=$withval
 else $as_nop
-  build_bitcoin_utils=yes
+  build_dogecoin_utils=yes
 fi
 
 
@@ -21342,9 +21343,9 @@ fi
 # Check whether --with-libs was given.
 if test ${with_libs+y}
 then :
-  withval=$with_libs; build_bitcoin_libs=$withval
+  withval=$with_libs; build_dogecoin_libs=$withval
 else $as_nop
-  build_bitcoin_libs=yes
+  build_dogecoin_libs=yes
 fi
 
 
@@ -21352,9 +21353,9 @@ fi
 # Check whether --with-daemon was given.
 if test ${with_daemon+y}
 then :
-  withval=$with_daemon; build_bitcoind=$withval
+  withval=$with_daemon; build_dogecoind=$withval
 else $as_nop
-  build_bitcoind=yes
+  build_dogecoind=yes
 fi
 
 
@@ -26916,14 +26917,14 @@ fi
 if test ${with_gui+y}
 then :
   withval=$with_gui;
-     bitcoin_qt_want_version=$withval
-     if test x$bitcoin_qt_want_version = xyes; then
-       bitcoin_qt_force=yes
-       bitcoin_qt_want_version=auto
+     dogecoin_qt_want_version=$withval
+     if test x$dogecoin_qt_want_version = xyes; then
+       dogecoin_qt_force=yes
+       dogecoin_qt_want_version=auto
      fi
 
 else $as_nop
-  bitcoin_qt_want_version=auto
+  dogecoin_qt_want_version=auto
 fi
 
 
@@ -26986,7 +26987,7 @@ fi
 
   if test x$use_pkgconfig = xyes; then
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
 
@@ -26994,16 +26995,16 @@ fi
   if test x$auto_priority_version = x; then
     auto_priority_version=qt5
   fi
-    if test x$bitcoin_qt_want_version = xqt5 ||  ( test x$bitcoin_qt_want_version = xauto && test x$auto_priority_version = xqt5 ); then
+    if test x$dogecoin_qt_want_version = xqt5 ||  ( test x$dogecoin_qt_want_version = xauto && test x$auto_priority_version = xqt5 ); then
       QT_LIB_PREFIX=Qt5
-      bitcoin_qt_got_major_vers=5
+      dogecoin_qt_got_major_vers=5
     fi
     qt5_modules="Qt5Core Qt5Gui Qt5Network Qt5Widgets Qt5PrintSupport"
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
-      if test x$bitcoin_qt_want_version = xqt5 || ( test x$bitcoin_qt_want_version = xauto && test x$auto_priority_version = xqt5 ); then
+      if test x$dogecoin_qt_want_version = xqt5 || ( test x$dogecoin_qt_want_version = xauto && test x$auto_priority_version = xqt5 ); then
 
 pkg_failed=no
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for $qt5_modules" >&5
@@ -27080,13 +27081,13 @@ fi
       if test x$have_qt != xyes; then
         have_qt=no
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Qt dependencies not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: Qt dependencies not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "Qt dependencies not found" "$LINENO" 5
   fi
@@ -27099,7 +27100,7 @@ printf "%s\n" "$as_me: WARNING: Qt dependencies not found; dogecoin-qt frontend 
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
 
@@ -27261,7 +27262,7 @@ fi
 
   else
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
   TEMP_CPPFLAGS="$CPPFLAGS"
@@ -27269,7 +27270,7 @@ fi
   CXXFLAGS="$PIC_FLAGS $CXXFLAGS"
   TEMP_LIBS="$LIBS"
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
     if test x$qt_include_path != x; then
@@ -27284,7 +27285,7 @@ fi
 
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     ac_fn_cxx_check_header_compile "$LINENO" "QtPlugin" "ac_cv_header_QtPlugin" "$ac_includes_default"
 if test "x$ac_cv_header_QtPlugin" = xyes
@@ -27292,13 +27293,13 @@ then :
 
 else $as_nop
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: QtCore headers missing; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: QtCore headers missing; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "QtCore headers missing" "$LINENO" 5
   fi
@@ -27311,7 +27312,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     ac_fn_cxx_check_header_compile "$LINENO" "QApplication" "ac_cv_header_QApplication" "$ac_includes_default"
 if test "x$ac_cv_header_QApplication" = xyes
@@ -27319,13 +27320,13 @@ then :
 
 else $as_nop
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: QtGui headers missing; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: QtGui headers missing; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "QtGui headers missing" "$LINENO" 5
   fi
@@ -27338,7 +27339,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     ac_fn_cxx_check_header_compile "$LINENO" "QLocalSocket" "ac_cv_header_QLocalSocket" "$ac_includes_default"
 if test "x$ac_cv_header_QLocalSocket" = xyes
@@ -27346,13 +27347,13 @@ then :
 
 else $as_nop
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: QtNetwork headers missing; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: QtNetwork headers missing; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "QtNetwork headers missing" "$LINENO" 5
   fi
@@ -27366,14 +27367,14 @@ fi
 
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
-    if test x$bitcoin_qt_want_version = xauto; then
+    if test x$dogecoin_qt_want_version = xauto; then
 
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for Qt 5" >&5
 printf %s "checking for Qt 5... " >&6; }
-if test ${bitcoin_cv_qt5+y}
+if test ${dogecoin_cv_qt5+y}
 then :
   printf %s "(cached) " >&6
 else $as_nop
@@ -27397,19 +27398,19 @@ main (void)
 _ACEOF
 if ac_fn_cxx_try_compile "$LINENO"
 then :
-  bitcoin_cv_qt5=yes
+  dogecoin_cv_qt5=yes
 else $as_nop
-  bitcoin_cv_qt5=no
+  dogecoin_cv_qt5=no
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
 
 fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $bitcoin_cv_qt5" >&5
-printf "%s\n" "$bitcoin_cv_qt5" >&6; }
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $dogecoin_cv_qt5" >&5
+printf "%s\n" "$dogecoin_cv_qt5" >&6; }
     fi
-    if test x$bitcoin_cv_qt5 = xyes || test x$bitcoin_qt_want_version = xqt5; then
+    if test x$dogecoin_cv_qt5 = xyes || test x$dogecoin_qt_want_version = xqt5; then
       QT_LIB_PREFIX=Qt5
-      bitcoin_qt_got_major_vers=5
+      dogecoin_qt_got_major_vers=5
     fi
 
   else
@@ -27419,7 +27420,7 @@ printf "%s\n" "$bitcoin_cv_qt5" >&6; }
 
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
     LIBS=
@@ -27470,13 +27471,13 @@ then :
 
 else $as_nop
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: libimm32 not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: libimm32 not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "libimm32 not found" "$LINENO" 5
   fi
@@ -27492,7 +27493,7 @@ fi
 
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     as_ac_Lib=`printf "%s\n" "ac_cv_lib_z ""_main" | $as_tr_sh`
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for main in -lz " >&5
@@ -27547,7 +27548,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for library containing png_error " >&5
 printf %s "checking for library containing png_error ... " >&6; }
@@ -27616,7 +27617,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for library containing jpeg_create_decompress " >&5
 printf %s "checking for library containing jpeg_create_decompress ... " >&6; }
@@ -27685,7 +27686,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for library containing pcre16_exec" >&5
 printf %s "checking for library containing pcre16_exec... " >&6; }
@@ -27754,7 +27755,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for library containing hb_ot_tags_from_script " >&5
 printf %s "checking for library containing hb_ot_tags_from_script ... " >&6; }
@@ -27823,7 +27824,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     as_ac_Lib=`printf "%s\n" "ac_cv_lib_${QT_LIB_PREFIX}Core   ""_main" | $as_tr_sh`
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for main in -l${QT_LIB_PREFIX}Core   " >&5
@@ -27871,13 +27872,13 @@ _ACEOF
 
 else $as_nop
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: lib$QT_LIB_PREFIXCore not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: lib$QT_LIB_PREFIXCore not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "lib$QT_LIB_PREFIXCore not found" "$LINENO" 5
   fi
@@ -27890,7 +27891,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     as_ac_Lib=`printf "%s\n" "ac_cv_lib_${QT_LIB_PREFIX}Gui    ""_main" | $as_tr_sh`
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for main in -l${QT_LIB_PREFIX}Gui    " >&5
@@ -27938,13 +27939,13 @@ _ACEOF
 
 else $as_nop
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: lib$QT_LIB_PREFIXGui not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: lib$QT_LIB_PREFIXGui not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "lib$QT_LIB_PREFIXGui not found" "$LINENO" 5
   fi
@@ -27957,7 +27958,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     as_ac_Lib=`printf "%s\n" "ac_cv_lib_${QT_LIB_PREFIX}Network""_main" | $as_tr_sh`
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for main in -l${QT_LIB_PREFIX}Network" >&5
@@ -28005,13 +28006,13 @@ _ACEOF
 
 else $as_nop
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: lib$QT_LIB_PREFIXNetwork not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: lib$QT_LIB_PREFIXNetwork not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "lib$QT_LIB_PREFIXNetwork not found" "$LINENO" 5
   fi
@@ -28024,7 +28025,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     as_ac_Lib=`printf "%s\n" "ac_cv_lib_${QT_LIB_PREFIX}Widgets""_main" | $as_tr_sh`
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for main in -l${QT_LIB_PREFIX}Widgets" >&5
@@ -28072,13 +28073,13 @@ _ACEOF
 
 else $as_nop
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: lib$QT_LIB_PREFIXWidgets not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: lib$QT_LIB_PREFIXWidgets not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "lib$QT_LIB_PREFIXWidgets not found" "$LINENO" 5
   fi
@@ -28091,7 +28092,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     as_ac_Lib=`printf "%s\n" "ac_cv_lib_${QT_LIB_PREFIX}PrintSupport""_main" | $as_tr_sh`
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for main in -l${QT_LIB_PREFIX}PrintSupport" >&5
@@ -28139,13 +28140,13 @@ _ACEOF
 
 else $as_nop
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: lib$QT_LIB_PREFIXPrintSupport not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: lib$QT_LIB_PREFIXPrintSupport not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "lib$QT_LIB_PREFIXPrintSupport not found" "$LINENO" 5
   fi
@@ -28161,7 +28162,7 @@ fi
   LIBS="$TEMP_LIBS"
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
     LIBS=
@@ -28306,18 +28307,18 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
   TEMP_CPPFLAGS=$CPPFLAGS
   TEMP_CXXFLAGS=$CXXFLAGS
   CPPFLAGS="$QT_INCLUDES $CPPFLAGS"
   CXXFLAGS="$PIC_FLAGS $CXXFLAGS"
-  if test x$bitcoin_qt_got_major_vers = x5; then
+  if test x$dogecoin_qt_got_major_vers = x5; then
 
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for static Qt" >&5
 printf %s "checking for static Qt... " >&6; }
-if test ${bitcoin_cv_static_qt+y}
+if test ${dogecoin_cv_static_qt+y}
 then :
   printf %s "(cached) " >&6
 else $as_nop
@@ -28341,24 +28342,24 @@ main (void)
 _ACEOF
 if ac_fn_cxx_try_compile "$LINENO"
 then :
-  bitcoin_cv_static_qt=yes
+  dogecoin_cv_static_qt=yes
 else $as_nop
-  bitcoin_cv_static_qt=no
+  dogecoin_cv_static_qt=no
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
 
 fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $bitcoin_cv_static_qt" >&5
-printf "%s\n" "$bitcoin_cv_static_qt" >&6; }
-  if test xbitcoin_cv_static_qt = xyes; then
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $dogecoin_cv_static_qt" >&5
+printf "%s\n" "$dogecoin_cv_static_qt" >&6; }
+  if test xdogecoin_cv_static_qt = xyes; then
 
 printf "%s\n" "#define QT_STATICPLUGIN 1" >>confdefs.h
 
   fi
 
-    if test x$bitcoin_cv_static_qt = xyes; then
+    if test x$dogecoin_cv_static_qt = xyes; then
 
-  if test x$bitcoin_qt_got_major_vers = x5; then
+  if test x$dogecoin_qt_got_major_vers = x5; then
       if test x$qt_plugin_path != x; then
         QT_LIBS="$QT_LIBS -L$qt_plugin_path/platforms"
         if test -d "$qt_plugin_path/accessible"; then
@@ -28651,7 +28652,7 @@ fi
        if test x$TARGET_OS = xwindows; then
          { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for Qt >= 5.6" >&5
 printf %s "checking for Qt >= 5.6... " >&6; }
-if test ${bitcoin_cv_need_platformsupport+y}
+if test ${dogecoin_cv_need_platformsupport+y}
 then :
   printf %s "(cached) " >&6
 else $as_nop
@@ -28672,18 +28673,18 @@ main (void)
 _ACEOF
 if ac_fn_cxx_try_compile "$LINENO"
 then :
-  bitcoin_cv_need_platformsupport=yes
+  dogecoin_cv_need_platformsupport=yes
 else $as_nop
-  bitcoin_cv_need_platformsupport=no
+  dogecoin_cv_need_platformsupport=no
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
 
 fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $bitcoin_cv_need_platformsupport" >&5
-printf "%s\n" "$bitcoin_cv_need_platformsupport" >&6; }
-         if test x$bitcoin_cv_need_platformsupport = xyes; then
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $dogecoin_cv_need_platformsupport" >&5
+printf "%s\n" "$dogecoin_cv_need_platformsupport" >&6; }
+         if test x$dogecoin_cv_need_platformsupport = xyes; then
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     as_ac_Lib=`printf "%s\n" "ac_cv_lib_${QT_LIB_PREFIX}PlatformSupport""_main" | $as_tr_sh`
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for main in -l${QT_LIB_PREFIX}PlatformSupport" >&5
@@ -28731,13 +28732,13 @@ _ACEOF
 
 else $as_nop
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: lib$QT_LIB_PREFIXPlatformSupport not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: lib$QT_LIB_PREFIXPlatformSupport not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "lib$QT_LIB_PREFIXPlatformSupport not found" "$LINENO" 5
   fi
@@ -28764,7 +28765,7 @@ printf "%s\n" "#define QT_STATICPLUGIN 1" >>confdefs.h
 
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for Qt < 5.4" >&5
 printf %s "checking for Qt < 5.4... " >&6; }
-if test ${bitcoin_cv_need_acc_widget+y}
+if test ${dogecoin_cv_need_acc_widget+y}
 then :
   printf %s "(cached) " >&6
 else $as_nop
@@ -28785,16 +28786,16 @@ main (void)
 _ACEOF
 if ac_fn_cxx_try_compile "$LINENO"
 then :
-  bitcoin_cv_need_acc_widget=yes
+  dogecoin_cv_need_acc_widget=yes
 else $as_nop
-  bitcoin_cv_need_acc_widget=no
+  dogecoin_cv_need_acc_widget=no
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
 
 fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $bitcoin_cv_need_acc_widget" >&5
-printf "%s\n" "$bitcoin_cv_need_acc_widget" >&6; }
-      if test "x$bitcoin_cv_need_acc_widget" = "xyes"; then
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $dogecoin_cv_need_acc_widget" >&5
+printf "%s\n" "$dogecoin_cv_need_acc_widget" >&6; }
+      if test "x$dogecoin_cv_need_acc_widget" = "xyes"; then
 
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for static Qt plugins: -lqtaccessiblewidgets" >&5
 printf %s "checking for static Qt plugins: -lqtaccessiblewidgets... " >&6; }
@@ -28821,13 +28822,13 @@ printf "%s\n" "yes" >&6; }; QT_LIBS="-lqtaccessiblewidgets $QT_LIBS"
 else $as_nop
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
 printf "%s\n" "no" >&6; };
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Could not resolve: -lqtaccessiblewidgets; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: Could not resolve: -lqtaccessiblewidgets; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "Could not resolve: -lqtaccessiblewidgets" "$LINENO" 5
   fi
@@ -28865,13 +28866,13 @@ printf "%s\n" "yes" >&6; }; QT_LIBS="-lqwindows $QT_LIBS"
 else $as_nop
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
 printf "%s\n" "no" >&6; };
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Could not resolve: -lqwindows; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: Could not resolve: -lqwindows; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "Could not resolve: -lqwindows" "$LINENO" 5
   fi
@@ -28907,13 +28908,13 @@ printf "%s\n" "yes" >&6; }; QT_LIBS="-lqminimal $QT_LIBS"
 else $as_nop
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
 printf "%s\n" "no" >&6; };
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Could not resolve: -lqminimal; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: Could not resolve: -lqminimal; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "Could not resolve: -lqminimal" "$LINENO" 5
   fi
@@ -28949,13 +28950,13 @@ printf "%s\n" "yes" >&6; }; QT_LIBS="-lwindowsprintersupport $QT_LIBS"
 else $as_nop
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
 printf "%s\n" "no" >&6; };
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Could not resolve: -lwindowsprintersupport; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: Could not resolve: -lwindowsprintersupport; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "Could not resolve: -lwindowsprintersupport" "$LINENO" 5
   fi
@@ -28995,13 +28996,13 @@ printf "%s\n" "yes" >&6; }; QT_LIBS="-lqxcb -lxcb-static $QT_LIBS"
 else $as_nop
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
 printf "%s\n" "no" >&6; };
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Could not resolve: -lqxcb -lxcb-static; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: Could not resolve: -lqxcb -lxcb-static; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "Could not resolve: -lqxcb -lxcb-static" "$LINENO" 5
   fi
@@ -29119,13 +29120,13 @@ printf "%s\n" "yes" >&6; }; QT_LIBS="-lqcocoa $QT_LIBS"
 else $as_nop
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
 printf "%s\n" "no" >&6; };
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Could not resolve: -lqcocoa; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: Could not resolve: -lqcocoa; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "Could not resolve: -lqcocoa" "$LINENO" 5
   fi
@@ -29151,14 +29152,14 @@ printf "%s\n" "#define QT_QPA_PLATFORM_COCOA 1" >>confdefs.h
 
 
   if test x$use_pkgconfig$qt_bin_path = xyes; then
-    if test x$bitcoin_qt_got_major_vers = x5; then
+    if test x$dogecoin_qt_got_major_vers = x5; then
       qt_bin_path="`$PKG_CONFIG --variable=host_bins Qt5Core 2>/dev/null`"
     fi
   fi
 
   if test x$use_hardening != xno; then
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether -fPIE can be used with this Qt config" >&5
@@ -29202,7 +29203,7 @@ rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
 
   else
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether -fPIC is needed with this Qt config" >&5
@@ -29245,11 +29246,11 @@ rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
 
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
     if test "x$qt_bin_path" != "x"; then
-      for ac_prog in moc-qt${bitcoin_qt_got_major_vers} moc${bitcoin_qt_got_major_vers} moc
+      for ac_prog in moc-qt${dogecoin_qt_got_major_vers} moc${dogecoin_qt_got_major_vers} moc
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -29300,7 +29301,7 @@ fi
 done
 
     else
-      for ac_prog in moc-qt${bitcoin_qt_got_major_vers} moc${bitcoin_qt_got_major_vers} moc
+      for ac_prog in moc-qt${dogecoin_qt_got_major_vers} moc${dogecoin_qt_got_major_vers} moc
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -29353,13 +29354,13 @@ done
     fi
     if test "x$MOC" = "x" && test "x" != "xyes"; then
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: MOC not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: MOC not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "MOC not found" "$LINENO" 5
   fi
@@ -29374,11 +29375,11 @@ printf "%s\n" "$as_me: WARNING: MOC not found; dogecoin-qt frontend will not be 
 
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
     if test "x$qt_bin_path" != "x"; then
-      for ac_prog in uic-qt${bitcoin_qt_got_major_vers} uic${bitcoin_qt_got_major_vers} uic
+      for ac_prog in uic-qt${dogecoin_qt_got_major_vers} uic${dogecoin_qt_got_major_vers} uic
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -29429,7 +29430,7 @@ fi
 done
 
     else
-      for ac_prog in uic-qt${bitcoin_qt_got_major_vers} uic${bitcoin_qt_got_major_vers} uic
+      for ac_prog in uic-qt${dogecoin_qt_got_major_vers} uic${dogecoin_qt_got_major_vers} uic
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -29482,13 +29483,13 @@ done
     fi
     if test "x$UIC" = "x" && test "x" != "xyes"; then
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: UIC not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: UIC not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "UIC not found" "$LINENO" 5
   fi
@@ -29503,11 +29504,11 @@ printf "%s\n" "$as_me: WARNING: UIC not found; dogecoin-qt frontend will not be 
 
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
     if test "x$qt_bin_path" != "x"; then
-      for ac_prog in rcc-qt${bitcoin_qt_got_major_vers} rcc${bitcoin_qt_got_major_vers} rcc
+      for ac_prog in rcc-qt${dogecoin_qt_got_major_vers} rcc${dogecoin_qt_got_major_vers} rcc
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -29558,7 +29559,7 @@ fi
 done
 
     else
-      for ac_prog in rcc-qt${bitcoin_qt_got_major_vers} rcc${bitcoin_qt_got_major_vers} rcc
+      for ac_prog in rcc-qt${dogecoin_qt_got_major_vers} rcc${dogecoin_qt_got_major_vers} rcc
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -29611,13 +29612,13 @@ done
     fi
     if test "x$RCC" = "x" && test "x" != "xyes"; then
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: RCC not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: RCC not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "RCC not found" "$LINENO" 5
   fi
@@ -29632,11 +29633,11 @@ printf "%s\n" "$as_me: WARNING: RCC not found; dogecoin-qt frontend will not be 
 
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
     if test "x$qt_bin_path" != "x"; then
-      for ac_prog in lrelease-qt${bitcoin_qt_got_major_vers} lrelease${bitcoin_qt_got_major_vers} lrelease
+      for ac_prog in lrelease-qt${dogecoin_qt_got_major_vers} lrelease${dogecoin_qt_got_major_vers} lrelease
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -29687,7 +29688,7 @@ fi
 done
 
     else
-      for ac_prog in lrelease-qt${bitcoin_qt_got_major_vers} lrelease${bitcoin_qt_got_major_vers} lrelease
+      for ac_prog in lrelease-qt${dogecoin_qt_got_major_vers} lrelease${dogecoin_qt_got_major_vers} lrelease
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -29740,13 +29741,13 @@ done
     fi
     if test "x$LRELEASE" = "x" && test "x" != "xyes"; then
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: LRELEASE not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: LRELEASE not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "LRELEASE not found" "$LINENO" 5
   fi
@@ -29761,11 +29762,11 @@ printf "%s\n" "$as_me: WARNING: LRELEASE not found; dogecoin-qt frontend will no
 
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
     if test "x$qt_bin_path" != "x"; then
-      for ac_prog in lupdate-qt${bitcoin_qt_got_major_vers} lupdate${bitcoin_qt_got_major_vers} lupdate
+      for ac_prog in lupdate-qt${dogecoin_qt_got_major_vers} lupdate${dogecoin_qt_got_major_vers} lupdate
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -29816,7 +29817,7 @@ fi
 done
 
     else
-      for ac_prog in lupdate-qt${bitcoin_qt_got_major_vers} lupdate${bitcoin_qt_got_major_vers} lupdate
+      for ac_prog in lupdate-qt${dogecoin_qt_got_major_vers} lupdate${dogecoin_qt_got_major_vers} lupdate
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -29869,13 +29870,13 @@ done
     fi
     if test "x$LUPDATE" = "x" && test "xyes" != "xyes"; then
 
-  if test "x$bitcoin_qt_want_version" = "xauto" && test x$bitcoin_qt_force != xyes; then
-    if test x$bitcoin_enable_qt != xno; then
+  if test "x$dogecoin_qt_want_version" = "xauto" && test x$dogecoin_qt_force != xyes; then
+    if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: LUPDATE not found; dogecoin-qt frontend will not be built" >&5
 printf "%s\n" "$as_me: WARNING: LUPDATE not found; dogecoin-qt frontend will not be built" >&2;}
     fi
-    bitcoin_enable_qt=no
-    bitcoin_enable_qt_test=no
+    dogecoin_enable_qt=no
+    dogecoin_enable_qt_test=no
   else
     as_fn_error $? "LUPDATE not found" "$LINENO" 5
   fi
@@ -29893,7 +29894,7 @@ printf "%s\n" "$as_me: WARNING: LUPDATE not found; dogecoin-qt frontend will not
   case $host in
     *darwin*)
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
        MOC_DEFS="${MOC_DEFS} -DQ_OS_MAC"
@@ -29948,7 +29949,7 @@ fi
     ;;
     *mingw*)
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
          { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether the linker accepts -mwindows" >&5
@@ -30003,17 +30004,17 @@ fi
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether to build Dogecoin Core GUI" >&5
 printf %s "checking whether to build Dogecoin Core GUI... " >&6; }
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
-    bitcoin_enable_qt=yes
-    bitcoin_enable_qt_test=yes
+    dogecoin_enable_qt=yes
+    dogecoin_enable_qt_test=yes
     if test x$have_qt_test = xno; then
-      bitcoin_enable_qt_test=no
+      dogecoin_enable_qt_test=no
     fi
-    bitcoin_enable_qt_dbus=no
+    dogecoin_enable_qt_dbus=no
     if test x$use_dbus != xno && test x$have_qt_dbus = xyes; then
-      bitcoin_enable_qt_dbus=yes
+      dogecoin_enable_qt_dbus=yes
     fi
     if test x$use_dbus = xyes && test x$have_qt_dbus = xno; then
       as_fn_error $? "\"libQtDBus not found. Install libQtDBus or remove --with-qtdbus.\"" "$LINENO" 5
@@ -30026,12 +30027,12 @@ printf "%s\n" "$as_me: WARNING: \"lupdate is required to update qt translations\
   else
     true
 
-    bitcoin_enable_qt=no
+    dogecoin_enable_qt=no
 
   fi
 
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $bitcoin_enable_qt (Qt${bitcoin_qt_got_major_vers})" >&5
-printf "%s\n" "$bitcoin_enable_qt (Qt${bitcoin_qt_got_major_vers})" >&6; }
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $dogecoin_enable_qt (Qt${dogecoin_qt_got_major_vers})" >&5
+printf "%s\n" "$dogecoin_enable_qt (Qt${dogecoin_qt_got_major_vers})" >&6; }
 
 
 
@@ -30041,12 +30042,12 @@ printf "%s\n" "$bitcoin_enable_qt (Qt${bitcoin_qt_got_major_vers})" >&6; }
 
 
 
-  QT_SELECT=qt${bitcoin_qt_got_major_vers}
+  QT_SELECT=qt${dogecoin_qt_got_major_vers}
 
 
 
 
-if test x$build_bitcoin_utils$build_bitcoind$bitcoin_enable_qt$use_tests$use_bench = xnonononono; then
+if test x$build_dogecoin_utils$build_dogecoind$dogecoin_enable_qt$use_tests$use_bench = xnonononono; then
     use_boost=no
 else
     use_boost=yes
@@ -30199,6 +30200,9 @@ printf "%s\n" "yes" >&6; }
     succeeded=yes
     found_system=yes
 
+else $as_nop
+
+
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
     ac_ext=cpp
@@ -30314,6 +30318,9 @@ then :
 printf "%s\n" "yes" >&6; }
         succeeded=yes
         found_system=yes
+
+else $as_nop
+
 
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
@@ -32172,7 +32179,7 @@ printf "%s\n" "yes" >&6; }
 fi
       if test x$use_qr != xno; then
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
 
 pkg_failed=no
@@ -32251,7 +32258,7 @@ fi
   fi
 
       fi
-      if test x$build_bitcoin_utils$build_bitcoind$bitcoin_enable_qt$use_tests != xnononono; then
+      if test x$build_dogecoin_utils$build_dogecoind$dogecoin_enable_qt$use_tests != xnononono; then
 
 pkg_failed=no
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for libevent" >&5
@@ -32590,7 +32597,7 @@ else $as_nop
 fi
 
 
-  if test x$build_bitcoin_utils$build_bitcoind$bitcoin_enable_qt$use_tests != xnononono; then
+  if test x$build_dogecoin_utils$build_dogecoind$dogecoin_enable_qt$use_tests != xnononono; then
     ac_fn_cxx_check_header_compile "$LINENO" "event2/event.h" "ac_cv_header_event2_event_h" "$ac_includes_default"
 if test "x$ac_cv_header_event2_event_h" = xyes
 then :
@@ -32763,7 +32770,7 @@ printf "%s\n" "#define ENABLE_ZMQ 0" >>confdefs.h
 
   if test x$use_qr != xno; then
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for main in -lqrencode" >&5
 printf %s "checking for main in -lqrencode... " >&6; }
@@ -32812,7 +32819,7 @@ fi
   fi
 
 
-  if test "x$bitcoin_enable_qt" != "xno" && test x$bitcoin_qt_want_version != xno; then
+  if test "x$dogecoin_enable_qt" != "xno" && test x$dogecoin_qt_want_version != xno; then
     true
     ac_fn_cxx_check_header_compile "$LINENO" "qrencode.h" "ac_cv_header_qrencode_h" "$ac_includes_default"
 if test "x$ac_cv_header_qrencode_h" = xyes
@@ -33910,7 +33917,7 @@ else $as_nop
 fi
 
 
-        if test x$bitcoin_enable_qt != xno; then
+        if test x$dogecoin_enable_qt != xno; then
       { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for main in -lQt5PlatformSupport" >&5
 printf %s "checking for main in -lQt5PlatformSupport... " >&6; }
 if test ${ac_cv_lib_Qt5PlatformSupport_main+y}
@@ -33979,7 +33986,7 @@ CXXFLAGS="${save_CXXFLAGS}"
 
 need_bundled_univalue=yes
 
-if test x$build_bitcoin_utils$build_bitcoind$bitcoin_enable_qt$use_tests$use_bench = xnonononono; then
+if test x$build_dogecoin_utils$build_dogecoind$dogecoin_enable_qt$use_tests$use_bench = xnonononono; then
   need_bundled_univalue=no
 else
 
@@ -34147,49 +34154,49 @@ fi
 
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether to build dogecoind" >&5
 printf %s "checking whether to build dogecoind... " >&6; }
- if test x$build_bitcoind = xyes; then
-  BUILD_BITCOIND_TRUE=
-  BUILD_BITCOIND_FALSE='#'
+ if test x$build_dogecoind = xyes; then
+  BUILD_DOGECOIND_TRUE=
+  BUILD_DOGECOIND_FALSE='#'
 else
-  BUILD_BITCOIND_TRUE='#'
-  BUILD_BITCOIND_FALSE=
+  BUILD_DOGECOIND_TRUE='#'
+  BUILD_DOGECOIND_FALSE=
 fi
 
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $build_bitcoind" >&5
-printf "%s\n" "$build_bitcoind" >&6; }
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $build_dogecoind" >&5
+printf "%s\n" "$build_dogecoind" >&6; }
 
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether to build utils (dogecoin-cli dogecoin-tx)" >&5
 printf %s "checking whether to build utils (dogecoin-cli dogecoin-tx)... " >&6; }
- if test x$build_bitcoin_utils = xyes; then
-  BUILD_BITCOIN_UTILS_TRUE=
-  BUILD_BITCOIN_UTILS_FALSE='#'
+ if test x$build_dogecoin_utils = xyes; then
+  BUILD_DOGECOIN_UTILS_TRUE=
+  BUILD_DOGECOIN_UTILS_FALSE='#'
 else
-  BUILD_BITCOIN_UTILS_TRUE='#'
-  BUILD_BITCOIN_UTILS_FALSE=
+  BUILD_DOGECOIN_UTILS_TRUE='#'
+  BUILD_DOGECOIN_UTILS_FALSE=
 fi
 
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $build_bitcoin_utils" >&5
-printf "%s\n" "$build_bitcoin_utils" >&6; }
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $build_dogecoin_utils" >&5
+printf "%s\n" "$build_dogecoin_utils" >&6; }
 
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether to build libraries" >&5
 printf %s "checking whether to build libraries... " >&6; }
- if test x$build_bitcoin_libs = xyes; then
-  BUILD_BITCOIN_LIBS_TRUE=
-  BUILD_BITCOIN_LIBS_FALSE='#'
+ if test x$build_dogecoin_libs = xyes; then
+  BUILD_DOGECOIN_LIBS_TRUE=
+  BUILD_DOGECOIN_LIBS_FALSE='#'
 else
-  BUILD_BITCOIN_LIBS_TRUE='#'
-  BUILD_BITCOIN_LIBS_FALSE=
+  BUILD_DOGECOIN_LIBS_TRUE='#'
+  BUILD_DOGECOIN_LIBS_FALSE=
 fi
 
-if test x$build_bitcoin_libs = xyes; then
+if test x$build_dogecoin_libs = xyes; then
 
 printf "%s\n" "#define HAVE_CONSENSUS_LIB 1" >>confdefs.h
 
   ac_config_files="$ac_config_files libdogecoinconsensus.pc:libdogecoinconsensus.pc.in"
 
 fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $build_bitcoin_libs" >&5
-printf "%s\n" "$build_bitcoin_libs" >&6; }
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $build_dogecoin_libs" >&5
+printf "%s\n" "$build_dogecoin_libs" >&6; }
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
@@ -34305,16 +34312,16 @@ printf "%s\n" "no" >&6; }
 fi
 
 BUILD_TEST_QT=""
-if test x$bitcoin_enable_qt != xno; then
+if test x$dogecoin_enable_qt != xno; then
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether to build GUI with support for D-Bus" >&5
 printf %s "checking whether to build GUI with support for D-Bus... " >&6; }
-  if test x$bitcoin_enable_qt_dbus != xno; then
+  if test x$dogecoin_enable_qt_dbus != xno; then
 
 printf "%s\n" "#define USE_DBUS 1" >>confdefs.h
 
   fi
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $bitcoin_enable_qt_dbus" >&5
-printf "%s\n" "$bitcoin_enable_qt_dbus" >&6; }
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $dogecoin_enable_qt_dbus" >&5
+printf "%s\n" "$dogecoin_enable_qt_dbus" >&6; }
 
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether to build GUI with support for QR codes" >&5
 printf %s "checking whether to build GUI with support for QR codes... " >&6; }
@@ -34345,7 +34352,7 @@ printf "%s\n" "$as_me: WARNING: \"xgettext is required to update qt translations
 
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether to build test_dogecoin-qt" >&5
 printf %s "checking whether to build test_dogecoin-qt... " >&6; }
-  if test x$use_gui_tests$bitcoin_enable_qt_test = xyesyes; then
+  if test x$use_gui_tests$dogecoin_enable_qt_test = xyesyes; then
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 printf "%s\n" "yes" >&6; }
     BUILD_TEST_QT="yes"
@@ -34386,7 +34393,7 @@ else
 printf "%s\n" "no" >&6; }
 fi
 
-if test x$build_bitcoin_utils$build_bitcoin_libs$build_bitcoind$bitcoin_enable_qt$use_bench$use_tests = xnononononono; then
+if test x$build_dogecoin_utils$build_dogecoin_libs$build_dogecoind$dogecoin_enable_qt$use_bench$use_tests = xnononononono; then
   as_fn_error $? "No targets! Please specify at least one of: --with-utils --with-libs --with-daemon --with-gui --enable-bench or --enable-tests" "$LINENO" 5
 fi
 
@@ -34430,7 +34437,7 @@ else
   ENABLE_TESTS_FALSE=
 fi
 
- if test x$bitcoin_enable_qt = xyes; then
+ if test x$dogecoin_enable_qt = xyes; then
   ENABLE_QT_TRUE=
   ENABLE_QT_FALSE='#'
 else
@@ -34786,16 +34793,16 @@ if test -z "${EMBEDDED_UNIVALUE_TRUE}" && test -z "${EMBEDDED_UNIVALUE_FALSE}"; 
   as_fn_error $? "conditional \"EMBEDDED_UNIVALUE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${BUILD_BITCOIND_TRUE}" && test -z "${BUILD_BITCOIND_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_BITCOIND\" was never defined.
+if test -z "${BUILD_DOGECOIND_TRUE}" && test -z "${BUILD_DOGECOIND_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_DOGECOIND\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${BUILD_BITCOIN_UTILS_TRUE}" && test -z "${BUILD_BITCOIN_UTILS_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_BITCOIN_UTILS\" was never defined.
+if test -z "${BUILD_DOGECOIN_UTILS_TRUE}" && test -z "${BUILD_DOGECOIN_UTILS_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_DOGECOIN_UTILS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${BUILD_BITCOIN_LIBS_TRUE}" && test -z "${BUILD_BITCOIN_LIBS_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_BITCOIN_LIBS\" was never defined.
+if test -z "${BUILD_DOGECOIN_LIBS_TRUE}" && test -z "${BUILD_DOGECOIN_LIBS_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_DOGECOIN_LIBS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLE_ZMQ_TRUE}" && test -z "${ENABLE_ZMQ_FALSE}"; then
@@ -35833,7 +35840,7 @@ cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
 for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
-    "src/config/bitcoin-config.h") CONFIG_HEADERS="$CONFIG_HEADERS src/config/bitcoin-config.h" ;;
+    "src/config/dogecoin-config.h") CONFIG_HEADERS="$CONFIG_HEADERS src/config/dogecoin-config.h" ;;
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "libdogecoinconsensus.pc") CONFIG_FILES="$CONFIG_FILES libdogecoinconsensus.pc:libdogecoinconsensus.pc.in" ;;
@@ -37490,9 +37497,9 @@ esac
 echo
 echo "Options used to compile and link:"
 echo "  with wallet   = $enable_wallet"
-echo "  with gui / qt = $bitcoin_enable_qt"
-if test x$bitcoin_enable_qt != xno; then
-    echo "    qt version  = $bitcoin_qt_got_major_vers"
+echo "  with gui / qt = $dogecoin_enable_qt"
+if test x$dogecoin_enable_qt != xno; then
+    echo "    qt version  = $dogecoin_qt_got_major_vers"
     echo "    with qr     = $use_qr"
 fi
 echo "  with zmq      = $use_zmq"

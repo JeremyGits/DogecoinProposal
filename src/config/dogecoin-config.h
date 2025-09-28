@@ -1,9 +1,9 @@
-/* src/config/dogecoin-config.h.  Generated from bitcoin-config.h.in by configure.  */
+/* src/config/dogecoin-config.h.  Generated from dogecoin-config.h.in by configure.  */
 /* src/config/dogecoin-config.h.in.  Generated from configure.ac by autoheader.  */
 
-#ifndef BITCOIN_CONFIG_H
+#ifndef DOGECOIN_CONFIG_H
 
-#define BITCOIN_CONFIG_H
+#define DOGECOIN_CONFIG_H
 
 /* Define if building universal (internal helper macro) */
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
@@ -362,7 +362,7 @@
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "1.14.99"
 
-/* Define to necessary symbol if this constant uses a non-standard name on
+/* Define to necessary symbol if this constant uses a non-standard name on
    your system. */
 /* #undef PTHREAD_CREATE_JOINABLE */
 
@@ -426,4 +426,4 @@
 /* Define for large files, on AIX-style hosts. */
 /* #undef _LARGE_FILES */
 
-#endif //BITCOIN_CONFIG_H
+#endif //DOGECOIN_CONFIG_H
